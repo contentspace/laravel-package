@@ -1,4 +1,14 @@
 <?php
 return[
-    'applications' => [ ]
+    'baseUrl' => 'http://contentspace.ir/',
+    'applications' => [
+        'demo' => [
+            'token' => 'demo',
+            'telegramChannels' => [
+                'demo' => [
+                    'id' => -1
+                ]
+            ]
+        ]
+    ]
 ];
