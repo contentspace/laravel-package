@@ -39,12 +39,27 @@ class ContentSpace extends Facade
      * @param string $application application name in the configuration
      * @param string $text the mesage to be send
      * 
-     * 
      * @retval int the number of sent message in content space server, or 0 if fails to send
      */
     public static function sendMessageToTelegramChannel(string $application, string $channel, string $text): int
     {
         return ContentSpaceService::sendMessageToTelegramChannel($application, $channel, $text);
+
+    }
+
+    /**
+     * send telegram bot message to content space server
+     * 
+     * @param string $application application name in the configuration
+     * @param int $botId the bot id in content space server
+     * @param int $memberId member id in content space server
+     * @param string $text the mesage to be send
+     * 
+     * @retval int the number of sent message in content space server, or 0 if fails to send
+     */
+    public static function sendMessageToTelegramMember(string $application, int $botId, int $memberId, string $text): int
+    {
+        return ContentSpaceService::sendMessageToTelegramMember($application, $botId, $memberId, $text);
 
     }
 }

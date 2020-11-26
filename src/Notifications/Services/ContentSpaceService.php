@@ -125,4 +125,59 @@ class ContentSpaceService
                 return 0;
         }
     }
+
+    /**
+     * send telegram bot message to content space server
+     * 
+     * @param string $application application name in the configuration
+     * @param int $botId the bot id in content space server
+     * @param int $memberId member id in content space server
+     * @param string $text the mesage to be send
+     * 
+     * 
+     * @retval int the number of sent message in content space server, or 0 if fails to send
+     */
+    public static function sendMessageToTelegramMember(string $application, int $botId, int $memberId, string $text): int
+    {
+        $config = config('content-space');
+
+        if (!isset($config['baseUrl']) || !is_string($config['baseUrl'])) {
+            // TODO: throw or log
+            return 0;
+        }
+
+        if (
+            !$config
+            || !is_array($config)
+            || !isset($config['applications'])
+            || !is_array($config['applications'])
+            || !isset($config['applications'][$application])
+            || !is_array($config['applications'][$application])
+            || !isset($config['applications'][$application]['token'])
+            || empty($config['applications'][$application]['token'])
+        ) {
+            // TODO: throw or log
+            return 0;
+        }
+        $token = $config['applications'][$application]['token'];
+
+        $url = $config['baseUrl'];
+        $response = Http::post($url . '/api/v1/app/' . $token . '/telegram/bot/' . $botId . '/member/' . $memberId . '/message', [
+            'text' => $text
+        ]);
+
+        $responseObject = $response->json();
+        if (!$responseObject || !isset($responseObject['status']) || !is_int($responseObject['status'])) {
+            // TODO: log bad format data
+            return 0;
+        }
+
+        switch ($responseObject['status']) {
+            case 201:
+                return $responseObject['result'];
+            default:
+                // TODO: log error, $responseObject['message']
+                return 0;
+        }
+    }
 }
