@@ -2,7 +2,7 @@
 
 namespace ContentSpace\Notifications\Messages;
 
-class ContentSpaceTelegramMessage
+class ContentSpaceTelegramImageMessage
 {
     /**
      * @var string
@@ -17,18 +17,24 @@ class ContentSpaceTelegramMessage
     /**
      * @var string
      */
-    private $_content;
+    private $_caption;
+
+    /**
+     * @var array
+     */
+    private $_images;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(string $application, string $channel, string $content)
+    public function __construct(string $application, string $channel, string $caption, array $images)
     {
-        $this->_content = $content;
+        $this->_caption = $caption;
         $this->_application = $application;
         $this->_channel = $channel;
+        $this->_images = $images;
     }
 
     /**
@@ -70,18 +76,46 @@ class ContentSpaceTelegramMessage
     /**
      * @return string
      */
-    public function getContent(): string
+    public function getCaption(): string
     {
-        return $this->_content;
+        return $this->_caption;
     }
 
     /**
-     * @param string $content
+     * @param string $caption
      * @return $this
      */
-    public function setContent(string $content): self
+    public function setCaption(string $caption): self
     {
-        $this->_content = $content;
+        $this->_caption = $caption;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getImages(): array
+    {
+        return $this->_images;
+    }
+
+    /**
+     * @param array $images
+     * @return $this
+     */
+    public function setImages(array $images): self
+    {
+        $this->_images = $images;
+        return $this;
+    }
+
+    /**
+     * @param string $image
+     * @return $this
+     */
+    public function addImage(string $image): self
+    {
+        $this->_images[] = $image;
         return $this;
     }
 }

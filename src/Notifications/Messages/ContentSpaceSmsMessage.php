@@ -43,7 +43,7 @@ class ContentSpaceSmsMessage
      * @param string $application
      * @return $this
      */
-    public function setApplication(string $application): ContentSpaceSmsMessage
+    public function setApplication(string $application): self
     {
         $this->_application = $application;
         return $this;
@@ -61,7 +61,7 @@ class ContentSpaceSmsMessage
      * @param string $mobile
      * @return $this
      */
-    public function setMobile(string $mobile): ContentSpaceSmsMessage
+    public function setMobile(string $mobile): self
     {
         $this->_mobile = $mobile;
         return $this;
@@ -79,7 +79,7 @@ class ContentSpaceSmsMessage
      * @param string $content
      * @return $this
      */
-    public function setContent(string $content): ContentSpaceSmsMessage
+    public function setContent(string $content): self
     {
         $this->_content = $content;
         return $this;

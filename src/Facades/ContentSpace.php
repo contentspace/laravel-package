@@ -48,6 +48,36 @@ class ContentSpace extends Facade
     }
 
     /**
+     * send telegram channel image message to content space server
+     * 
+     * @param string $application application name in the configuration
+     * @param string $text the mesage to be send
+     * @param array $images public url of images
+     * 
+     * @retval int the number of sent message in content space server, or 0 if fails to send
+     */
+    public static function sendImageToTelegramChannel(string $application, string $channel, string $text, array $images): int
+    {
+        return ContentSpaceService::sendImageToTelegramChannel($application, $channel, $text, $images);
+
+    }
+
+    /**
+     * send telegram channel document message to content space server
+     * 
+     * @param string $application application name in the configuration
+     * @param string $text the mesage to be send
+     * @param array $coduments public url of documents, currently only one document supported
+     * 
+     * @retval int the number of sent message in content space server, or 0 if fails to send
+     */
+    public static function sendDocumentToTelegramChannel(string $application, string $channel, string $text, array $documents): int
+    {
+        return ContentSpaceService::sendDocumentToTelegramChannel($application, $channel, $text, $documents);
+
+    }
+
+    /**
      * send telegram bot message to content space server
      * 
      * @param string $application application name in the configuration

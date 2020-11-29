@@ -2,7 +2,7 @@
 
 namespace ContentSpace\Notifications\Messages;
 
-class ContentSpaceTelegramMessage
+class ContentSpaceTelegramDocumentMessage
 {
     /**
      * @var string
@@ -17,18 +17,24 @@ class ContentSpaceTelegramMessage
     /**
      * @var string
      */
-    private $_content;
+    private $_caption;
+
+    /**
+     * @var array
+     */
+    private $_documents;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(string $application, string $channel, string $content)
+    public function __construct(string $application, string $channel, string $caption, array $documents)
     {
-        $this->_content = $content;
+        $this->_caption = $caption;
         $this->_application = $application;
         $this->_channel = $channel;
+        $this->_documents = $documents;
     }
 
     /**
@@ -70,18 +76,46 @@ class ContentSpaceTelegramMessage
     /**
      * @return string
      */
-    public function getContent(): string
+    public function getCaption(): string
     {
-        return $this->_content;
+        return $this->_caption;
     }
 
     /**
-     * @param string $content
+     * @param string $caption
      * @return $this
      */
-    public function setContent(string $content): self
+    public function setCaption(string $caption): self
     {
-        $this->_content = $content;
+        $this->_caption = $caption;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDocuments(): array
+    {
+        return $this->_documents;
+    }
+
+    /**
+     * @param array $documents
+     * @return $this
+     */
+    public function setDocuments(array $documents): self
+    {
+        $this->_documents = $documents;
+        return $this;
+    }
+
+    /**
+     * @param string $document
+     * @return $this
+     */
+    public function addDocument(string $document): self
+    {
+        $this->_documents[] = $document;
         return $this;
     }
 }
